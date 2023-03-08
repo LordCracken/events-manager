@@ -33,7 +33,7 @@ function App() {
     <>
       <MainNavigation />
       <Routes>
-        <Route path="" element={<HomePage />} />
+        <Route index element={<HomePage />} />
         <Route path="events" element={<EventsPage />}>
           <Route path=":eventId" element={<EventDetailPage />}>
             <Route path="edit" element={<EditEventPage />} />
