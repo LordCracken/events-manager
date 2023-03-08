@@ -34,10 +34,12 @@ function App() {
       <MainNavigation />
       <Routes>
         <Route path="" element={<HomePage />} />
-        <Route path="events" element={<EventsPage />} />
-        <Route path="events/:eventId" element={<EventDetailPage />} />
-        <Route path="events/new" element={<NewEventPage />} />
-        <Route path="events/:eventId/edit" element={<EditEventPage />} />
+        <Route path="events" element={<EventsPage />}>
+          <Route path=":eventId" element={<EventDetailPage />}>
+            <Route path="edit" element={<EditEventPage />} />
+          </Route>
+          <Route path="new" element={<NewEventPage />} />
+        </Route>
       </Routes>
     </>
   );
