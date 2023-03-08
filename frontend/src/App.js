@@ -30,13 +30,16 @@ import MainNavigation from './components/MainNavigation';
 
 function App() {
   return (
-    <Routes>
-      <Route path="" element={<HomePage />} />
-      <Route path="events" element={<EventsPage />} />
-      <Route path="events/:eventId" element={<EventDetailPage />} />
-      <Route path="events/new" element={<NewEventPage />} />
-      <Route path="events/:eventId/edit" element={<EditEventPage />} />
-    </Routes>
+    <>
+      <MainNavigation />
+      <Routes>
+        <Route path="" element={<HomePage />} />
+        <Route path="events" element={<EventsPage />} />
+        <Route path="events/:eventId" element={<EventDetailPage />} />
+        <Route path="events/new" element={<NewEventPage />} />
+        <Route path="events/:eventId/edit" element={<EditEventPage />} />
+      </Routes>
+    </>
   );
 }
 
