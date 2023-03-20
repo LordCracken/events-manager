@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import HomePage from './pages/Home';
-import EventsRoot from './pages/Events';
+import EventsRoot from './pages/events';
 import MainNavigation from './components/MainNavigation';
 
 function App() {
