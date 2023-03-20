@@ -1,21 +1,37 @@
-import { Route, Routes } from 'react-router-dom';
-import EventsNavigation from '../../components/EventsNavigation';
-import EventDetailPage from './EventDetail';
-import EditEventPage from './EditEvent';
-import NewEventPage from './NewEvent';
-import AllEventsPage from './AllEvents';
+import { useEffect, useState } from 'react';
+import EventsList from '../../components/EventsList';
 
-const EventsPage = () => (
-  <>
-    <EventsNavigation />
-    <Routes>
-      <Route index element={<AllEventsPage />} />
-      <Route path=":eventId" element={<EventDetailPage />}>
-        <Route path="edit" element={<EditEventPage />} />
-      </Route>
-      <Route path="new" element={<NewEventPage />} />
-    </Routes>
-  </>
-);
+const AllEventsPage = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [fetchedEvents, setFetchedEvents] = useState();
+  const [error, setError] = useState();
 
-export default EventsPage;
+  useEffect(() => {
+    async function fetchEvents() {
+      setIsLoading(true);
+      const response = await fetch('http://localhost:8080/events');
+
+      if (!response.ok) {
+        setError('Fetching events failed.');
+      } else {
+        const resData = await response.json();
+        setFetchedEvents(resData.events);
+      }
+      setIsLoading(false);
+    }
+
+    fetchEvents();
+  }, []);
+
+  return (
+    <>
+      <div style={{ textAlign: 'center' }}>
+        {isLoading && <p>Loading...</p>}
+        {error && <p>{error}</p>}
+      </div>
+      {!isLoading && fetchedEvents && <EventsList events={fetchedEvents} />}
+    </>
+  );
+};
+
+export default AllEventsPage;

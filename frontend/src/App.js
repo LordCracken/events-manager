@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import HomePage from './pages/Home';
-import EventsPage from './pages/Events';
+import EventsRoot from './pages/Events';
 import MainNavigation from './components/MainNavigation';
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
       <MainNavigation />
       <Routes>
         <Route index element={<HomePage />} />
-        <Route path="events/*" element={<EventsPage />}></Route>
+        <Route path="events/*" element={<EventsRoot />}></Route>
       </Routes>
     </>
   );

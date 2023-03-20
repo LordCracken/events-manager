@@ -1,17 +1,17 @@
 import { Route, Routes } from 'react-router-dom';
 
-import AllEventsPage from './AllEvents';
+import EventsPage from './Events';
 import EventDetailPage from './EventDetail';
 import EditEventPage from './EditEvent';
 import NewEventPage from './NewEvent';
 
 import EventsNavigation from '../../components/EventsNavigation';
 
-const EventsPage = () => (
+const EventsRoot = () => (
   <>
     <EventsNavigation />
     <Routes>
-      <Route index element={<AllEventsPage />} />
+      <Route index element={<EventsPage />} />
       <Route path=":eventId" element={<EventDetailPage />}>
         <Route path="edit" element={<EditEventPage />} />
       </Route>
@@ -20,4 +20,4 @@ const EventsPage = () => (
   </>
 );
 
-export default EventsPage;
+export default EventsRoot;
