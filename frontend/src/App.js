@@ -1,29 +1,35 @@
-import { Route, Routes } from 'react-router-dom';
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  RouterProvider,
+} from 'react-router-dom';
+
+import Root from './pages';
 import HomePage from './pages/Home';
 import EventsRoot from './pages/events';
-import MainNavigation from './components/MainNavigation';
+import EventsPage, { loader as eventsLoader } from './pages/events/Events';
+import EventDetailPage from './pages/events/EventDetail';
+import EditEventPage from './pages/events/EditEvent';
+import NewEventPage from './pages/events/NewEvent';
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<Root />}>
+      <Route index element={<HomePage />} />
+      <Route path="events/*" element={<EventsRoot />}>
+        <Route index loader={eventsLoader} element={<EventsPage />} />
+        <Route path=":eventId" element={<EventDetailPage />}>
+          <Route path="edit" element={<EditEventPage />} />
+        </Route>
+        <Route path="new" element={<NewEventPage />} />
+      </Route>
+    </Route>,
+  ),
+);
 
 function App() {
-  const getEventsData = async () => {
-    const response = await fetch('http://localhost:8080/events');
-
-    if (!response.ok) {
-      console.error('Something went wrong');
-    } else {
-      const resData = await response.json();
-      return resData.events;
-    }
-  };
-
-  return (
-    <>
-      <MainNavigation />
-      <Routes>
-        <Route index element={<HomePage />} />
-        <Route path="events/*" loader={getEventsData} element={<EventsRoot />}></Route>
-      </Routes>
-    </>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
