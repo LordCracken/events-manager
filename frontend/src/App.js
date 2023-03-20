@@ -1,9 +1,4 @@
-import {
-  createBrowserRouter,
-  createRoutesFromElements,
-  Route,
-  RouterProvider,
-} from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import Root from './pages';
 import HomePage from './pages/Home';
@@ -14,20 +9,26 @@ import EditEventPage from './pages/events/EditEvent';
 import NewEventPage from './pages/events/NewEvent';
 import ErrorPage from './pages/Error';
 
-const router = createBrowserRouter(
-  createRoutesFromElements(
-    <Route path="/" element={<Root />} errorElement={<ErrorPage />}>
-      <Route index element={<HomePage />} />
-      <Route path="events/*" element={<EventsRoot />}>
-        <Route index loader={eventsLoader} element={<EventsPage />} />
-        <Route path=":eventId" element={<EventDetailPage />}>
-          <Route path="edit" element={<EditEventPage />} />
-        </Route>
-        <Route path="new" element={<NewEventPage />} />
-      </Route>
-    </Route>,
-  ),
-);
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Root />,
+    errorElement: <ErrorPage />,
+    children: [
+      { index: true, element: <HomePage /> },
+      {
+        path: 'events',
+        element: <EventsRoot />,
+        children: [
+          { index: true, element: <EventsPage />, loader: eventsLoader },
+          { path: ':eventId', element: <EventDetailPage /> },
+          { path: ':eventId/edit', element: <EditEventPage /> },
+          { path: 'new', element: <NewEventPage /> },
+        ],
+      },
+    ],
+  },
+]);
 
 function App() {
   return <RouterProvider router={router} />;
