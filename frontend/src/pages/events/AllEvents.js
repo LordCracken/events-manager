@@ -12,13 +12,16 @@ const DUMMY_EVENTS = [
 ];
 
 const AllEventsPage = () => (
-  <ul>
-    {DUMMY_EVENTS.map(event => (
-      <li key={event.id}>
-        <Link to={event.id}>{event.title}</Link>
-      </li>
-    ))}
-  </ul>
+  <>
+    <h1>Events Page</h1>
+    <ul>
+      {DUMMY_EVENTS.map(event => (
+        <li key={event.id}>
+          <Link to={event.id}>{event.title}</Link>
+        </li>
+      ))}
+    </ul>
+  </>
 );
 
 export default AllEventsPage;

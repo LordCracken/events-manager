@@ -1,9 +1,11 @@
 import { Route, Routes } from 'react-router-dom';
-import EventsNavigation from '../components/EventsNavigation';
+
+import AllEventsPage from './AllEvents';
 import EventDetailPage from './EventDetail';
 import EditEventPage from './EditEvent';
 import NewEventPage from './NewEvent';
-import AllEventsPage from './AllEvents';
+
+import EventsNavigation from '../../components/EventsNavigation';
 
 const EventsPage = () => (
   <>
