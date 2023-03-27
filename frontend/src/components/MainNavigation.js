@@ -20,9 +20,14 @@ function MainNavigation() {
           <li>
             <NavLink
               to="newsletter"
-              className={({ isActive }) => (isActive ? classes.active : undefined)}
+              className={({ isActive }) => (isActive ? classes.active : null)}
             >
               Newsletter
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="auth" className={({ isActive }) => (isActive ? classes.active : null)}>
+              Authentication
             </NavLink>
           </li>
         </ul>

@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import Root from './pages';
 import HomePage from './pages/Home';
+import AuthenticationPage from './pages/Authentication';
 import NewsletterPage, { action as newsletterAction } from './pages/Newsletter';
 import EventsRoot from './pages/events';
 import EventsPage, { loader as eventsLoader } from './pages/events/Events';
@@ -22,6 +23,7 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       { index: true, element: <HomePage /> },
+      { path: 'auth', element: <AuthenticationPage /> },
       {
         path: 'events',
         element: <EventsRoot />,
