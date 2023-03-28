@@ -14,6 +14,7 @@ import EditEventPage from './pages/events/EditEvent';
 import NewEventPage from './pages/events/NewEvent';
 import ErrorPage from './pages/Error';
 
+import { action as logoutAction } from './pages/Logout';
 import { action as manipulateEventAction } from './components/EventForm';
 
 const router = createBrowserRouter([
@@ -46,6 +47,7 @@ const router = createBrowserRouter([
         element: <NewsletterPage />,
         action: newsletterAction,
       },
+      { path: 'logout', action: logoutAction },
     ],
   },
 ]);
