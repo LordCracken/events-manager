@@ -16,7 +16,7 @@ import ErrorPage from './pages/Error';
 
 import { action as logoutAction } from './pages/Logout';
 import { action as manipulateEventAction } from './components/EventForm';
-import { tokenLoader } from './util/auth';
+import { checkAuthLoader, tokenLoader } from './util/auth';
 
 const router = createBrowserRouter([
   {
@@ -39,10 +39,20 @@ const router = createBrowserRouter([
             loader: eventDetailLoader,
             children: [
               { index: true, element: <EventDetailPage />, action: deleteEventAction },
-              { path: 'edit', element: <EditEventPage />, action: manipulateEventAction },
+              {
+                path: 'edit',
+                element: <EditEventPage />,
+                action: manipulateEventAction,
+                loader: checkAuthLoader,
+              },
             ],
           },
-          { path: 'new', element: <NewEventPage />, action: manipulateEventAction },
+          {
+            path: 'new',
+            element: <NewEventPage />,
+            action: manipulateEventAction,
+            loader: checkAuthLoader,
+          },
         ],
       },
       {
