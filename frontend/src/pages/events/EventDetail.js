@@ -1,7 +1,10 @@
 import { Suspense } from 'react';
 import { Await, defer, json, redirect, useRouteLoaderData } from 'react-router-dom';
+
 import EventItem from '../../components/EventItem';
 import EventsList from '../../components/EventsList';
+
+import { getAuthToken } from '../../util/auth';
 
 const EventDetailPage = () => {
   const { event, events } = useRouteLoaderData('event-detail');
@@ -50,7 +53,11 @@ export const loader = async ({ params }) => {
 
 export const action = async ({ request, params }) => {
   const id = params.eventId;
-  const response = await fetch(`http://localhost:8080/events/${id}`, { method: request.method });
+  const token = getAuthToken();
+  const response = await fetch(`http://localhost:8080/events/${id}`, {
+    method: request.method,
+    headers: { Authorization: `Bearer ${token}` },
+  });
 
   if (!response.ok) {
     return json({ message: 'Could not delete event.' }, { status: 500 });
