@@ -16,12 +16,15 @@ import ErrorPage from './pages/Error';
 
 import { action as logoutAction } from './pages/Logout';
 import { action as manipulateEventAction } from './components/EventForm';
+import { tokenLoader } from './util/auth';
 
 const router = createBrowserRouter([
   {
     path: '/',
+    id: 'root',
     element: <Root />,
     errorElement: <ErrorPage />,
+    loader: tokenLoader,
     children: [
       { index: true, element: <HomePage /> },
       { path: 'auth', element: <AuthenticationPage />, action: authAction },
